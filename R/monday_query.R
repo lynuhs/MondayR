@@ -1,6 +1,6 @@
 #' Get custom API request string
 #'
-#' Type in your own request string
+#' Query Monday.com with json encoded string
 #'
 #' @param query Query parameters for the Graph API
 #'
@@ -9,7 +9,7 @@
 #'
 #' @export
 #' @examples
-#' monday_query(query)
+#' monday_query("{me{name, id}}")
 monday_query <- function(query){
   url <- paste0("https://api.monday.com/v2/")
   tryCatch({

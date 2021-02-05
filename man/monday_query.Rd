@@ -10,8 +10,8 @@ monday_query(query)
 \item{query}{Query parameters for the Graph API}
 }
 \description{
-Type in your own request string
+Query Monday.com with json encoded string
 }
 \examples{
-monday_query(query)
+monday_query("{me{name, id}}")
 }

@@ -105,8 +105,6 @@ monday_auth <- function(client_id = Sys.getenv("MONDAY_CLIENT_ID"), client_secre
 create_oauth_token <- function(){
   check_existing <- check_existing_token()$is_valid
   if(!check_existing){
-    cat(crayon::red("Auto-refresh of token not possible, manual re-authentication required\n"))
-
     if(!interactive()){
       stop("Authentication options didn't match existing session token and not interactive session
            so unable to manually reauthenticate", call. = FALSE)
