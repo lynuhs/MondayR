@@ -9,7 +9,7 @@ devtools::install_github("lynuhs/MondayR")
 
 ## How do I authorize the API?
 In order to use this connector, you must set up a Monday.com App.
-You can du that easily by navigating to your workspace followed by '/apps/manage'
+You can do that easily by navigating to your workspace followed by '/apps/manage', e.g. "https://lynuhs.monday.com/apps/manage"
 Create a new app and copy the client id and secret. 
 ```
 monday_auth(client_id, client_secret)
