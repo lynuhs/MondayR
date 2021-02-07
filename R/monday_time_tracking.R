@@ -53,26 +53,28 @@ monday_time_tracking <- function(board_id = NULL, raw = FALSE){
   for(n in 1:nrow(data)){
     if(!is.na(data[n,'column_value'])){
       row_data <- jsonlite::fromJSON(data[n,'column_value'])
-      for(i in 1:nrow(row_data$additional_value)){
-        detail <- rbind.fill(
-          detail,
-          data.frame(
-            board_id = data[n,'board_id'],
-            board_name = data[n,'board_name'],
-            item_id = data[n,'item_id'],
-            item_name = data[n,'item_name'],
-            id = row_data$additional_value[i,]$id,
-            user = row_data$additional_value[i,]$started_user_id,
-            started_at = as_datetime(row_data$additional_value[i,]$started_at, tz="GMT"),
-            ended_at = as_datetime(row_data$additional_value[i,]$ended_at, tz="GMT"),
-            minutes = as.integer(difftime(
-              as_datetime(row_data$additional_value[i,]$ended_at, tz="GMT"),
-              as_datetime(row_data$additional_value[i,]$started_at, tz="GMT"),
-              units = "mins"
-            )),
-            stringsAsFactors = FALSE
+      if(nrow(row_data$additional_value) > 0){
+        for(i in 1:nrow(row_data$additional_value)){
+          detail <- rbind.fill(
+            detail,
+            data.frame(
+              board_id = data[n,'board_id'],
+              board_name = data[n,'board_name'],
+              item_id = data[n,'item_id'],
+              item_name = data[n,'item_name'],
+              id = row_data$additional_value[i,]$id,
+              user = row_data$additional_value[i,]$started_user_id,
+              started_at = as_datetime(row_data$additional_value[i,]$started_at, tz="GMT"),
+              ended_at = as_datetime(row_data$additional_value[i,]$ended_at, tz="GMT"),
+              minutes = as.integer(difftime(
+                as_datetime(row_data$additional_value[i,]$ended_at, tz="GMT"),
+                as_datetime(row_data$additional_value[i,]$started_at, tz="GMT"),
+                units = "mins"
+              )),
+              stringsAsFactors = FALSE
+            )
           )
-        )
+        }
       }
     }
   }
