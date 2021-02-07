@@ -35,6 +35,6 @@ monday_query <- function(query){
     }
 
   }, error = function(e){
-    cat(crayon::red("Error: Not an authorized API call"))
+    cat(crayon::red(e))
   })
 }
