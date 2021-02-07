@@ -2,7 +2,7 @@ Package: MondayR
 Type: Package
 Title: Monday.com Connector for R
 Version: 0.1.0
-Author: Who wrote it
+Author: Linus Larsson
 Maintainer: Linus Larsson <linus@lynuhs.com>
 Description: 
 License: -
