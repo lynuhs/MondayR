@@ -5,6 +5,7 @@
 #' @param board_id The id of a Monday.com board (optional)
 #' @param raw Wether or not to return raw or structured data (defaults to FALSE)
 #'
+#' @import lubridate
 #'
 #' @export
 #' @examples
