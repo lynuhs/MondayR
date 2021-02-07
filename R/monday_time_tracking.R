@@ -6,6 +6,7 @@
 #' @param raw Wether or not to return raw or structured data (defaults to FALSE)
 #'
 #' @import lubridate
+#' @import plyr
 #'
 #' @export
 #' @examples
@@ -53,7 +54,7 @@ monday_time_tracking <- function(board_id = NULL, raw = FALSE){
   for(n in 1:nrow(data)){
     if(!is.na(data[n,'column_value'])){
       row_data <- jsonlite::fromJSON(data[n,'column_value'])
-      if(nrow(row_data$additional_value) > 0){
+      if(!is.null(row_data$additional_value)){
         for(i in 1:nrow(row_data$additional_value)){
           detail <- rbind.fill(
             detail,
