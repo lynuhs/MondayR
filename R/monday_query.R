@@ -28,14 +28,16 @@ monday_query <- function(query){
 
     if(any(grepl("errors.code",names(unlist(data))))){
       cat(crayon::red("Error: Not an authorized API call"))
-    } #else if(!is.null(data$errors)){
-      #stop(paste0("Error: ", data$errors[[1]]$message), call. = FALSE)
-    #}
+    } else if(!is.null(data$errors)){
+      stop(data$errors[[1]]$message, call. = FALSE)
+    }
     else {
       return(data)
     }
 
   }, error = function(e){
-    cat(crayon::red(e))
+    cat(crayon::red(paste0(
+      "Error: ", e$message
+    )))
   })
 }
