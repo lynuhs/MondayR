@@ -11,6 +11,14 @@
 #' @examples
 #' monday_query("{me{name, id}}")
 monday_query <- function(query){
+  if(!monday_check_existing_token()){
+    tryCatch({
+      monday_auth()
+    }, error = function(e){
+      stop("No authenticated token found!",call. = FALSE)
+    })
+  }
+
   url <- paste0("https://api.monday.com/v2/")
   tryCatch({
     data <- content(POST(

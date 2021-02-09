@@ -8,7 +8,6 @@
 #' @family authentication functions
 #' @noRd
 is_legit_token <- function(x) {
-
   if(!inherits(x, "Token2.0")) {
     cat(crayon::red(paste0("Not a Token2.0 object. Found:", class(x), "\n")))
     if(!inherits(x, "list")){
@@ -64,36 +63,19 @@ monday_check_existing_token <- function(token = MondayAuth$public_fields$token){
     return(FALSE)
   }
 
-  cache_path <- is.different(token$cache_path, "MondayR.httr_oauth_cache")
+  cache_path <- is.different(token$cache_path, "MondayR.oauth_cache")
 
   if(!is.null(token$app)){
-    app_id     <- is.different(token$app$key, "MondayR.app_id")
-    app_secret <- is.different(token$app$secret, "MondayR.app_secret")
+    app_id     <- is.different(token$app$key, "MondayR.client_id")
+    app_secret <- is.different(token$app$secret, "MondayR.client_secret")
 
   } else {
-    cat(crayon::red("No App Client ID in token\n"))
+    cat(crayon::red("No Client ID in token\n"))
   }
 
   ## FALSE if any are different, TRUE if they are not
   !any(cache_path, app_id, app_secret)
 }
-
-is.different <- function(token_element, option_name){
-  if(!all(token_element %in% getOption(option_name))){
-    cat(crayon::red(sprintf("Token %s != getOption('%s') \n#>Token: %s \n#>Option: %s\n",
-                            deparse(substitute(token_element)),
-                            option_name,
-                            paste(token_element, collapse = " "),
-                            paste(getOption(option_name), collapse = " "),
-                            "\n"
-    )))
-
-    return(TRUE)
-  }
-  FALSE
-}
-
-
 
 is.different <- function(token_element, option_name){
   if(!all(token_element %in% getOption(option_name))){

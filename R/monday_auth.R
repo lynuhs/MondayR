@@ -30,6 +30,11 @@ monday_auth <- function(client_id = Sys.getenv("MONDAY_CLIENT_ID"), client_secre
     rm_old_user_cache(httr_file)
   }
 
+  # Check if token is saved
+  if(file.exists(getOption("MondayR.oauth_cache"))){
+    token <- getOption("MondayR.oauth_cache")
+  }
+
   if((client_id == "" | client_secret == "") & is.null(token)){
     cat(crayon::red("Enter your credentials to authorize"))
     client_id <- readline("Client Id: ")
