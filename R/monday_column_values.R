@@ -34,7 +34,7 @@ monday_column_values <- function(item_id = NULL, board_id = NULL, column_id = NU
   column_type <- ifelse(is.null(column_type), "", column_type)
 
   boards <- monday_query(paste0(
-    "{boards(limit: 10000", board_id, "){id, name, items(limit: 10000", item_id, "){group{title}, id, name, column_values{id, title, type, value, text}}}}"
+    "{boards(limit: 10000", board_id, "){id, name, items(limit: 10000", item_id, "){group{title, color}, id, name, column_values{id, title, type, value, text}}}}"
   ))
 
   if(raw){
