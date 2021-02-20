@@ -63,6 +63,8 @@ monday_time_tracking <- function(board_id = NULL, raw = FALSE){
               board_name = data[n,'board_name'],
               item_id = data[n,'item_id'],
               item_name = data[n,'item_name'],
+              group_title = data[n,'group_title'],
+              group_color = data[n,'group_color'],
               id = row_data$additional_value[i,]$id,
               user = row_data$additional_value[i,]$started_user_id,
               started_at = as_datetime(row_data$additional_value[i,]$started_at, tz="GMT"),
