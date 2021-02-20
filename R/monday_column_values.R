@@ -34,7 +34,7 @@ monday_column_values <- function(item_id = NULL, board_id = NULL, column_id = NU
   column_type <- ifelse(is.null(column_type), "", column_type)
 
   boards <- monday_query(paste0(
-    "{boards(limit: 10000", board_id, "){id, name, items(limit: 10000", item_id, "){id, name, column_values{id, title, type, value, text}}}}"
+    "{boards(limit: 10000", board_id, "){id, name, items(limit: 10000", item_id, "){group{title}, id, name, column_values{id, title, type, value, text}}}}"
   ))
 
   if(raw){
@@ -62,6 +62,8 @@ monday_column_values <- function(item_id = NULL, board_id = NULL, column_id = NU
                 board_name = nullToNA(boards[[b]]$name),
                 item_id = nullToNA(boards[[b]]$items[[i]]$id),
                 item_name = nullToNA(boards[[b]]$items[[i]]$name),
+                group_title = boards[[b]]$items[[i]]$group$title,
+                group_color = boards[[b]]$items[[i]]$group$color,
                 column_id = nullToNA(cl['id'][[1]]),
                 column_title = nullToNA(cl['title'][[1]]),
                 column_type = nullToNA(cl['type'][[1]]),
